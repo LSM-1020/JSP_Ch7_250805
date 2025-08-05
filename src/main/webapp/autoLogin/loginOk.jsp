@@ -18,12 +18,18 @@
 		if(mid.equals("tiger") && mpw.equals("12345")) {
 			if(rememberId != null) { //참이면 체크박스에 체크가 된 상태로 넘어옴
 				Cookie cookie = new Cookie("saveId",mid); //쿠키에 savId -> tiger값 생성
+				Cookie cookie2 = new Cookie("savePw",mpw);//쿠키에 savPw -> 12345값 생성
 				cookie.setMaxAge(60*60*24*7); //7일동안 유지
+				cookie2.setMaxAge(60*60*24*7); //7일동안 유지
 				response.addCookie(cookie);//쿠키 클라이언트에게 다시 보내기
-			} else { //체크박스에 체크를 안한 상태로 넘어오면-> 쿠키 삭제하기
-				Cookie cookie = new Cookie("saveId",mid); //쿠키에 savId -> tiger값 생성
+				response.addCookie(cookie2);//쿠키 클라이언트에게 다시 보내기
+			} else { //체크박스에 체크를 안한 상태로 넘어오면-> 쿠키 삭제하기->자동로그인 풀림
+				Cookie cookie = new Cookie("saveId",mid); //쿠키에 savId 생성
+				Cookie cookie2 = new Cookie("savePd",mpw); //쿠키에 savPw 생성
 				cookie.setMaxAge(0);//쿠키 삭제
+				cookie2.setMaxAge(0);//쿠키 삭제
 				response.addCookie(cookie);//쿠키 클라이언트에게 다시 보내기
+				response.addCookie(cookie2);//쿠키 클라이언트에게 다시 보내기
 			}
 			
 			
